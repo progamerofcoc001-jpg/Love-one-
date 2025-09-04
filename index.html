@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Text</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+    }
+    .fall {
+      position: absolute;
+      top: -50px;
+      color: red;
+      font-size: 32px;
+      font-family: Arial, sans-serif;
+      animation: drop linear forwards;
+    }
+    @keyframes drop {
+      from { top: -50px; opacity: 1; }
+      to { top: 100vh; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Array of texts jo girenge
+  const messages = [
+    "❤️ I Love You ❤️",
+    "💌 Forever Yours 💌",
+    "🌹 You are Special 🌹",
+    "✨ Always Together ✨"
+  ];
+
+  function createFallingText() {
+    // Random ek message pick karna
+    const text = messages[Math.floor(Math.random() * messages.length)];
+
+    // Ek new span element banana
+    const span = document.createElement("span");
+    span.classList.add("fall");
+    span.textContent = text;
+
+    // Random horizontal position
+    span.style.left = Math.random() * window.innerWidth + "px";
+
+    // Random animation duration
+    const duration = 3 + Math.random() * 3;
+    span.style.animationDuration = duration + "s";
+
+    document.body.appendChild(span);
+
+    // Jab animation khatam ho jaye, element remove kar do
+    setTimeout(() => {
+      span.remove();
+    }, duration * 1000);
+  }
+
+  // Har 500ms me new text girta rahega
+  setInterval(createFallingText, 500);
+</script>
+
+</body>
+</html>
